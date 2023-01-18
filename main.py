@@ -48,6 +48,20 @@ def lineare_funktion():
         b = float(b_entry.get())
 
 
+def Menu() :
+    
+    menu = tk.menu(root,tearoff = 0)
+    root.config(menu = menu)
+    menu.add_cascade(label = "lineare")
+    
+    
+    
+root.mainloop
+
+
+
+
+
 
 
 
