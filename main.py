@@ -53,7 +53,13 @@ def Menu() :
     menu = tk.menu(root,tearoff = 0)
     root.config(menu = menu)
     menu.add_cascade(label = "lineare")
-    
+    menu.add_cascade(label = "Quadratische")
+    menu.add_cascade(label = "Ganzrationale")
+    menu.add_command(label="Trigonometrische")
+    menu.add_command(label="Exponential")
+    menu.add_command(label="Differenzial")
+    menu.add_command(label="Kurvendiskusion")
+    menu.add_command(label="Integralrechnung")
     
     
 root.mainloop
