@@ -52,7 +52,7 @@ def Menu() :
     
     menu = tk.menu(root,tearoff = 0)
     root.config(menu = menu)
-    menu.add_cascade(label = "lineare")
+    menu.add_cascade(label = "lineare",command = lineare_funktion)
     menu.add_cascade(label = "Quadratische")
     menu.add_cascade(label = "Ganzrationale")
     menu.add_command(label="Trigonometrische")
