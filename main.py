@@ -1,36 +1,30 @@
 from tkinter import *
-
+from tkinter import ttk
 root = Tk()
-root.title("log in")
+root.title("main window")
 root.geometry("400x400")
 root.resizable(width=0, height=0)
 
-def login ():
-    lnfenster = Tk()
-    lnfenster.title("log in Fenster")
-    lnfenster.geometry("600x600")
-    lnfenster.resizable(width=0,height=0)
-    Funktionen = StringVar(lnfenster)
-    Funktionen.set("Funktionen")
 
-    def show(selection):
-        Auswahl = selection
-        fenster = Tk()
-        fenster.geometry("600x600")
-        fenster.resizable(width=0,height=0)
-        fenster.title(Auswahl)
+def show(select):
+    fenster = Tk()
+    fenster.title("main window")
+    fenster.geometry("400x400")
+    fenster.resizable(width=0, height=0)
 
-        if Auswahl == "Linearefunktion":
-            butoon1 = Button(fenster, text="Ausführen", )
-            ytext = Entry(fenster, bd=5, width=7)
-            xtext = Entry(fenster, bd=5, width=7)
-            btext = Entry(fenster, bd=5, width=7)
-            mtext = Entry(fenster, bd=5, width=7)
+    if cmb.get() == "linear":
 
-    drop = OptionMenu(root,"Lineare-Funktion" , "Quadratische-Funktion" ,
-                      "Ganzrationale-Funktionen" ,"Trigonometrische-Funktionen" , "Exponential-Funktionen" ,
-                      "Einstieg-Differenzialrechnung" , "Kurvendiskussion", "Integralrechnung",)
-    drop.pack()
-    drop.place(relx=0.0, rely=0.0)
+        return
+
+funktionen = ("Linear", "Qudratische", "Ganzrationale", "Trigonometrische", "Exponential",
+                      "Einstieg-Differenzialrechnung", "Kurvendiskussion", "Integralrechnung")
+
+l1 = Label(root, text="Funktionenen auswahl")
+l1.grid(row=0, column=0)
+cmb = ttk.Combobox(root, value=funktionen, width=15)
+cmb.set('Funktionen')
+
+cmb.grid(row=1, column=0)
+
 
 root.mainloop()
