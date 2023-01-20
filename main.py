@@ -13,10 +13,24 @@ def show(select):
     fenster.resizable(width=0, height=0)
 
     if cmb.get() == "linear":
-
+        
+	elif cmb.get() == "Qudratisch":
+    
+    elif cmb.get() == "Ganzrationale":
+    
+    elif cmb.get() == "Trigonometrische":
+    
+    elif cmb.get()	== "Exponentail":
+        
+    elif cmb.get() == "Einstig-Defferenzilrechnung":
+        
+    elif cmb.get() == "Kurvendiskussion":
+        
+    elif mcb.get() == "Integralrechnung": 
+    
         return
 
-funktionen = ("Linear", "Qudratische", "Ganzrationale", "Trigonometrische", "Exponential",
+funktionen = ("Linear", "Qudratisch", "Ganzrationale", "Trigonometrische", "Exponential",
                       "Einstieg-Differenzialrechnung", "Kurvendiskussion", "Integralrechnung")
 
 l1 = Label(root, text="Funktionenen auswahl")
