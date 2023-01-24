@@ -5,6 +5,7 @@ root = Tk()
 root.title("main_window")
 root.geometry("400x400")
 root.resizable(width=0, height=0)
+
 def search(selection):
     fenster = Tk()
     fenster.title("main window")
@@ -39,12 +40,13 @@ def search(selection):
 
 funktionen = ("Linear", "Qudratisch", "Ganzrationale", "Trigonometrische", "Exponential",
               "Einstieg-Differenzialrechnung", "Kurvendiskussion", "Integralrechnung")
-l1 = Label(root, text="Funktionenen auswahl")
-l1.grid(row=0, column=0)
 
+l1 = Label(root, text="Funktionenen auswahl")
 cmb = ttk.Combobox(root, value=funktionen, width=15)
 cmb.set('Funktionen')
 button1 = Button(root, text="Ausführen",command=search(selection=funktionen))
+
+l1.grid(row=0, column=0)
 button1.grid(row=1,column=1)
 cmb.grid(row=1, column=0)
 root.mainloop()
