@@ -15,6 +15,7 @@ def search(event):
     fenster.resizable(width=0, height=0)
 
     if clicked.get() == 'Linear':
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
