@@ -16,6 +16,10 @@ def search(event):
 
     if clicked.get() == 'Linear':
         root.destroy()
+        y_label = Label(fenster,text="y Achse")
+        y_entry = Entry(fenster)
+        x_label = Label(fenster,text="x Achse")
+        x_entry = Entry(fenster)
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -38,8 +42,6 @@ def search(event):
             ax = plt.gca()
             plt.gca().set_aspect('equal')
 
-            ax.set_xticks(range(-10, 10, 1))
-            ax.set_yticks(range(-10, 10, 1))
             ax.set_xlim([von,bis])
             ax.set_ylim([von,bis])
 
@@ -50,8 +52,31 @@ def search(event):
 
             x = np.linspace(-5, 5, 100)
             y = m * x + b
-
+            plt.xlabel(x_entry.get())
+            plt.ylabel(y_entry.get())
             plt.plot(x,y)
+            plt.title('Linear')
+            plt.grid()
+            plt.show()
+
+        def bsp():
+
+            ax = plt.gca()
+            plt.gca().set_aspect('equal')
+
+            ax.set_xlim([0, 10])
+            ax.set_ylim([0,10])
+
+            ax.spines['top'].set_color('none')
+            ax.spines['bottom'].set_position('zero')
+            ax.spines['left'].set_position('zero')
+            ax.spines['right'].set_color('none')
+
+            x = np.linspace(-5, 5, 100)
+            y = 2 * x + 2
+            plt.xlabel("zeit")
+            plt.ylabel("Wissen")
+            plt.plot(x, y)
             plt.title('Linear')
             plt.grid()
             plt.show()
@@ -64,11 +89,16 @@ def search(event):
         m_entry.grid(row=2,column=1)
         b_label.grid(row=3,column=0)
         b_entry.grid(row=3,column=1)
-        
-        Button(fenster, command=rechnen, text="Anzeigen").grid(row=4,column=1)
+        y_label.grid(row=4,column=0)
+        y_entry.grid(row=4,column=1)
+        x_label.grid(row=5,column=0)
+        x_entry.grid(row=5,column=1)
 
+        Button(fenster, command=rechnen, text="Anzeigen").grid(row=6,column=1)
+        Button(fenster, command=bsp, text="Beispiel").grid(row=0, column=4)
 
     elif clicked.get() == "Qudratisch" :
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -91,12 +121,22 @@ def search(event):
             c = b_entry.get()
             c = float(c)
 
-            x = np.arange(-100, 100, 0.1)
+            ax = plt.gca()
+            plt.gca().set_aspect('equal')
+
+
+            ax.set_xlim([von, bis])
+            ax.set_ylim([von, bis])
+
+            ax.spines['top'].set_color('none')
+            ax.spines['bottom'].set_position('zero')
+            ax.spines['left'].set_position('zero')
+            ax.spines['right'].set_color('none')
+
+            x = np.arange(-10, 10, 100)
             y = a * x ** 2 + b * x + c
-            
-            plt.xlabel('x-Werte')
-            plt.ylabel('y-Werte')
-            plt.plot(x, y)
+
+            plt.plot(x,y)
             plt.title('Quadratisch')
             plt.grid()
             plt.show()
@@ -115,6 +155,7 @@ def search(event):
         Button(fenster, command=rechnen, text="Anzeigen").grid(row=5, column=1)
 
     elif clicked.get() == "Ganzrationale" :
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -125,6 +166,7 @@ def search(event):
         bis_label.grid(row=1, column=0)
         bis_entry.grid(row=1, column=1)
     elif clicked.get() == "Trigonometrische" :
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -135,6 +177,7 @@ def search(event):
         bis_label.grid(row=1, column=0)
         bis_entry.grid(row=1, column=1)
     elif clicked.get() =="Exponential" :
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -145,6 +188,7 @@ def search(event):
         bis_label.grid(row=1, column=0)
         bis_entry.grid(row=1, column=1)
     elif clicked.get() =="Einstieg-Differenzialrechnung":
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -155,6 +199,7 @@ def search(event):
         bis_label.grid(row=1, column=0)
         bis_entry.grid(row=1, column=1)
     elif clicked.get() =="Kurvendiskussion":
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
@@ -165,6 +210,7 @@ def search(event):
         bis_label.grid(row=1, column=0)
         bis_entry.grid(row=1, column=1)
     elif clicked.get() == "Integralrechnung":
+        root.destroy()
         von_label = Label(fenster, text="anfang: ")
         von_entry = Entry(fenster)
         bis_label = Label(fenster, text="ende: ")
