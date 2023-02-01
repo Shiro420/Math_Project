@@ -110,6 +110,22 @@ def search(event):
         c_label = Label(fenster, text="c: ")
         c_entry = Entry(fenster)
         def rechnen():
+                    root.destroy()
+        y_label = Label(fenster, text="y Achse")
+        y_entry = Entry(fenster)
+        x_label = Label(fenster, text="x Achse")
+        x_entry = Entry(fenster)
+        von_label = Label(fenster, text="anfang: ")
+        von_entry = Entry(fenster)
+        bis_label = Label(fenster, text="ende: ")
+        bis_entry = Entry(fenster)
+        a_label = Label(fenster, text="a: ")
+        a_entry = Entry(fenster)
+        b_label = Label(fenster, text="b: ")
+        b_entry = Entry(fenster)
+        c_label = Label(fenster, text="c: ")
+        c_entry = Entry(fenster)
+        def rechnen():
             von = von_entry.get()
             von = float(von)
             bis = bis_entry.get()
@@ -124,21 +140,22 @@ def search(event):
             ax = plt.gca()
             plt.gca().set_aspect('equal')
 
-
-            ax.set_xlim([von, bis])
-            ax.set_ylim([von, bis])
+            ax.set_xlim([von,bis])
+            ax.set_ylim([von,bis])
 
             ax.spines['top'].set_color('none')
             ax.spines['bottom'].set_position('zero')
             ax.spines['left'].set_position('zero')
             ax.spines['right'].set_color('none')
 
-            x = np.arange(-10, 10, 100)
-            y = a * x ** 2 + b * x + c
+            x = np.linspace(-5, 5, 100)
+            y = a * x**2 + b * x + c
 
-            plt.plot(x,y)
-            plt.title('Quadratisch')
-            plt.grid()
+
+            plt.xlabel(x_entry.get())
+            plt.ylabel(y_entry.get())
+            plt.title('Funktion $ax^2 + bx + c$')
+            plt.plot(x, y)
             plt.show()
 
         von_label.grid(row=0, column=0)
@@ -151,8 +168,12 @@ def search(event):
         b_entry.grid(row=3, column=1)
         c_label.grid(row=4, column=0)
         c_entry.grid(row=4, column=1)
+        y_label.grid(row=5, column=0)
+        y_entry.grid(row=5, column=1)
+        x_label.grid(row=6, column=0)
+        x_entry.grid(row=6, column=1)
 
-        Button(fenster, command=rechnen, text="Anzeigen").grid(row=5, column=1)
+        Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=1)
 
     elif clicked.get() == "Ganzrationale" :
         root.destroy()
