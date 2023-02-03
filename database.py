@@ -11,3 +11,4 @@ def datenbankertellen():
                 );"""
     cur.execute(Tabelle)
     con.commit() 
+    con.close()
