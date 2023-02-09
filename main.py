@@ -219,7 +219,7 @@ def Funktion():
             ySentry.grid(row=3,column=7)
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=1)
-            #Button(fenster, command=scheitelpunkt(), text="Anzeigen").grid(row=4, column=7)
+            Button(fenster, command=scheitelpunkt(), text="Anzeigen").grid(row=4, column=7)
 
         elif clicked.get() == "Ganzrationale" :
             root.destroy()
