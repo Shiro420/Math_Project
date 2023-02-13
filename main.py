@@ -21,27 +21,35 @@ def Funktion():
         fenster.resizable(width=0, height=0)
 
         if clicked.get() == 'Linear':
-            root.destroy()
+
             y_label = Label(fenster,text="y Achse")
             y_entry = Entry(fenster)
+
             x_label = Label(fenster,text="x Achse")
             x_entry = Entry(fenster)
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
+
             bis_label = Label(fenster, text="ende: ")
             bis_entry = Entry(fenster)
+
             m_label = Label(fenster, text=" m: ")
             m_entry = Entry(fenster)
+
             b_label = Label(fenster, text=" b: ")
             b_entry = Entry(fenster)
 
             def rechnen():
                 von = von_entry.get()
                 von = float(von)
+
                 bis = bis_entry.get()
                 bis = float(bis)
+
                 m = m_entry.get()
                 m = float(m)
+
                 b = b_entry.get()
                 b = float(b)
 
@@ -51,16 +59,12 @@ def Funktion():
                 ax.set_xlim([von,bis])
                 ax.set_ylim([von,bis])
 
-                ax.spines['top'].set_color('none')
-                ax.spines['bottom'].set_position('zero')
-                ax.spines['left'].set_position('zero')
-                ax.spines['right'].set_color('none')
-
                 x = np.linspace(-5, 5, 100)
                 y = m * x + b
+
                 plt.xlabel(x_entry.get())
                 plt.ylabel(y_entry.get())
-                plt.plot(x,y)
+                plt.plot(x,y,'r')
                 plt.title('Linear')
                 plt.grid()
                 plt.show()
@@ -70,38 +74,41 @@ def Funktion():
                 ax = plt.gca()
                 plt.gca().set_aspect('equal')
 
-                ax.set_xlim([0, 10])
-                ax.set_ylim([0,10])
+                ax.set_xlim([-10, 10])
+                ax.set_ylim([-10,10])
 
-                ax.spines['top'].set_color('none')
-                ax.spines['bottom'].set_position('zero')
-                ax.spines['left'].set_position('zero')
-                ax.spines['right'].set_color('none')
 
                 x = np.linspace(-5, 5, 100)
-                y = 2 * x + 2
-                plt.xlabel("zeit")
-                plt.ylabel("Wissen")
-                plt.plot(x, y)
-                plt.title('Linear')
+                y = 2 * x + 1
+
+                plt.plot(x, y, 'r', label='2*x+1')
+                plt.title('Linearfunktion')
+                plt.legend(loc='upper left')
                 plt.grid()
                 plt.show()
 
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
+
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
+
             m_label.grid(row=2,column=0)
             m_entry.grid(row=2,column=1)
+
             b_label.grid(row=3,column=0)
             b_entry.grid(row=3,column=1)
+
             y_label.grid(row=4,column=0)
             y_entry.grid(row=4,column=1)
+
             x_label.grid(row=5,column=0)
             x_entry.grid(row=5,column=1)
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=6,column=1)
+
             Button(fenster, command=bsp, text="Beispiel").grid(row=0, column=4)
+
             Button(fenster,text="close",command=fenster.destroy).grid(row=0,column=9)
 
         elif clicked.get() == "Qudratisch" :
