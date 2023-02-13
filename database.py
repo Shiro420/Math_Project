@@ -1,14 +1,13 @@
 import sqlite3
 
-def datenbankertellen():
-    con =sqlite3.connect("Datenbank.db")
+def create_db():
+    con = sqlite3.connect("mathe.db")
     cur = con.cursor()
 
-
-    Tabelle = f"""CREATE TABLE anmeldung(
-                    benutzername TEXT,
-                    passwort TEXT
-                );"""
-    cur.execute(Tabelle)
-    con.commit() 
+    # Tabelle user erstellen
+    sql = "CREATE TABLE user (" \
+          "username TEXT, " \
+          "passwort TEXT);"
+    cur.execute(sql)
+    con.commit()
     con.close()
