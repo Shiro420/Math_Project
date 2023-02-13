@@ -21,16 +21,16 @@ def Funktion():
         fenster.resizable(width=0, height=0)
 
         if clicked.get() == 'Linear':
-
+            #Y Achsen werte
             y_label = Label(fenster,text="y Achse")
             y_entry = Entry(fenster)
-
+            #x Achsen werte 
             x_label = Label(fenster,text="x Achse")
             x_entry = Entry(fenster)
-
+            #beginn der Grafik
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
-
+            #ende der Grafik
             bis_label = Label(fenster, text="ende: ")
             bis_entry = Entry(fenster)
 
