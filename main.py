@@ -21,16 +21,16 @@ def Funktion():
         fenster.resizable(width=0, height=0)
 
         if clicked.get() == 'Linear':
-            #Y Achsen werte
+
             y_label = Label(fenster,text="y Achse")
             y_entry = Entry(fenster)
-            #x Achsen werte 
+
             x_label = Label(fenster,text="x Achse")
             x_entry = Entry(fenster)
-            #beginn der Grafik
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
-            #ende der Grafik
+
             bis_label = Label(fenster, text="ende: ")
             bis_entry = Entry(fenster)
 
@@ -61,12 +61,11 @@ def Funktion():
 
                 x = np.linspace(-5, 5, 100)
                 y = m * x + b
-
                 plt.xlabel(x_entry.get())
                 plt.ylabel(y_entry.get())
-                plt.plot(x,y,'r')
-                plt.title('Linear')
-                plt.grid()
+                plt.plot(x, y, 'r', label='f(x)=m*x+b')
+                plt.legend(loc='upper left')
+                plt.title('Linearfunktion')
                 plt.show()
 
             def bsp():
