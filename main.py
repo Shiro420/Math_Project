@@ -63,7 +63,7 @@ def Funktion():
                 y = m * x + b
                 plt.xlabel(x_entry.get())
                 plt.ylabel(y_entry.get())
-                plt.plot(x, y, 'r', label='f(x)=m*x+b')
+                plt.plot(x, y, 'r', label='f(x)='+ m_entry.get()+'*x+'+ b_entry.get())
                 plt.legend(loc='upper left')
                 plt.title('Linearfunktion')
                 plt.show()
