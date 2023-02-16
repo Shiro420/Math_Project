@@ -164,7 +164,7 @@ def Funktion():
                 plt.xlabel(x_entry.get())
                 plt.ylabel(y_entry.get())
                 plt.title('Funktion $ax^2 + bx + c$')
-                plt.plot(x, y)
+                plt.plot(x, y,'r',label='f(x)='+a_entry.get() + 'x^2'+'+' + b_entry.get() +'x'+ c_entry.get())
                 plt.show()
             def scheitelpunkt():
                 von = von_entry.get()
