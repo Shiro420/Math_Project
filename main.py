@@ -24,19 +24,14 @@ def Funktion():
 
             y_label = Label(fenster,text="y Achse")
             y_entry = Entry(fenster)
-
             x_label = Label(fenster,text="x Achse")
             x_entry = Entry(fenster)
-
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
-
             bis_label = Label(fenster, text="ende: ")
             bis_entry = Entry(fenster)
-
             m_label = Label(fenster, text=" m: ")
             m_entry = Entry(fenster)
-
             b_label = Label(fenster, text=" b: ")
             b_entry = Entry(fenster)
 
@@ -65,7 +60,7 @@ def Funktion():
                 plt.ylabel(y_entry.get())
                 plt.plot(x, y, 'r', label='f(x)='+ m_entry.get()+'*x+'+ b_entry.get())
                 plt.legend(loc='upper left')
-                plt.title('Linearfunktion')
+                plt.title('Funktion f(x)=m*x+b')
                 plt.show()
 
             def bsp():
@@ -80,38 +75,31 @@ def Funktion():
                 x = np.linspace(-5, 5, 100)
                 y = 2 * x + 1
 
-                plt.plot(x, y, 'r', label='2*x+1')
-                plt.title('Linearfunktion')
+                plt.plot(x, y, 'r', label='f(x)=2*x+1')
+                plt.title('Funktion f(x)=m*x+b')
                 plt.legend(loc='upper left')
                 plt.grid()
                 plt.show()
 
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
-
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
-
             m_label.grid(row=2,column=0)
             m_entry.grid(row=2,column=1)
-
             b_label.grid(row=3,column=0)
             b_entry.grid(row=3,column=1)
-
             y_label.grid(row=4,column=0)
             y_entry.grid(row=4,column=1)
-
             x_label.grid(row=5,column=0)
             x_entry.grid(row=5,column=1)
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=6,column=1)
-
             Button(fenster, command=bsp, text="Beispiel").grid(row=0, column=4)
-
             Button(fenster,text="close",command=fenster.destroy).grid(row=0,column=9)
 
-        elif clicked.get() == "Qudratisch" :
-            root.destroy()
+        elif clicked.get() == "Qudratisch":
+            #Noramalfunkion
             ya_label = Label(fenster, text="y Achse")
             ya_entry = Entry(fenster)
             xa_label = Label(fenster, text="x Achse")
@@ -126,6 +114,7 @@ def Funktion():
             b_entry = Entry(fenster)
             c_label = Label(fenster, text="c: ")
             c_entry = Entry(fenster)
+            #Scheitelpunkt
             Alabel = Label(fenster,text="a")
             Aentry = Entry(fenster)
             x1label = Label(fenster,text="x")
@@ -164,8 +153,10 @@ def Funktion():
                 plt.xlabel(x_entry.get())
                 plt.ylabel(y_entry.get())
                 plt.title('Funktion $ax^2 + bx + c$')
-                plt.plot(x, y,'r',label='f(x)='+a_entry.get() + 'x^2'+'+' + b_entry.get() +'x'+ c_entry.get())
+                plt.plot(x,y,'r',label='f(x)='+a_entry.get() + 'x^2'+'+' + b_entry.get() +'x'+'+'+ c_entry.get())
+                plt.legend(loc='upper left')
                 plt.show()
+
             def scheitelpunkt():
                 von = von_entry.get()
                 von = float(von)
@@ -199,7 +190,7 @@ def Funktion():
                 plt.title('Funktion $ax^2 + bx + c$')
                 plt.plot(x, y)
                 plt.show()
-
+            #normalfunktion
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
             bis_label.grid(row=1, column=0)
@@ -214,7 +205,7 @@ def Funktion():
             ya_entry.grid(row=5, column=1)
             xa_label.grid(row=6, column=0)
             xa_entry.grid(row=6, column=1)
-
+            #Scheitelpukt
             Alabel.grid(row=0,column=6)
             Aentry.grid(row=0,column=7)
             x1label.grid(row=1,column=6)
@@ -226,6 +217,7 @@ def Funktion():
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=1)
             Button(fenster, command=scheitelpunkt(), text="Anzeigen").grid(row=4, column=7)
+            Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=8)
 
         elif clicked.get() == "Ganzrationale" :
             root.destroy()
