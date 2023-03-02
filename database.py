@@ -16,3 +16,4 @@ def create_db():
     insert = f"INSERT INTO anmeldung VALUES('{Benutzer}', '{Passwort}');"
     cursor.execute(insert)
     con.close()
+creat_db()
