@@ -52,7 +52,7 @@ def Funktion():
                 ax.set_xlim([von,bis])
                 ax.set_ylim([von,bis])
 
-                x = np.linspace(-5, 5, 100)
+                x = np.linspace(von, bis, 100)
                 y = m * x + b
 
                 ax.set_xlabel(x_entry.get())
@@ -138,7 +138,7 @@ def Funktion():
                 ax.set_xlim([von,bis])
                 ax.set_ylim([von,bis])
 
-                x = np.linspace(-5, 5, 100)
+                x = np.linspace(von,bis,100)
                 y = a * x**2 + b * x + c
 
                 ax.set_xlabel(x_entry.get())
