@@ -1,6 +1,7 @@
 from tkinter import *
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 Anmeldung = Tk()
 Anmeldung.title("Login")
@@ -11,13 +12,13 @@ def Funktion():
     Anmeldung.destroy()
     root = Tk()
     root.title("main_window")
-    root.geometry("400x400")
+    root.geometry("900x900")
     root.resizable(width=0, height=0)
 
     def search(event):
         fenster = Tk()
         fenster.title("Window")
-        fenster.geometry("500x500")
+        fenster.geometry("900x900")
         fenster.resizable(width=0, height=0)
 
         if clicked.get() == 'Linear':
@@ -38,48 +39,52 @@ def Funktion():
             def rechnen():
                 von = von_entry.get()
                 von = float(von)
-
                 bis = bis_entry.get()
                 bis = float(bis)
-
                 m = m_entry.get()
                 m = float(m)
-
                 b = b_entry.get()
                 b = float(b)
 
-                ax = plt.gca()
-                plt.gca().set_aspect('equal')
+                fig = plt.Figure(figsize=(10, 20), dpi=100)
+                ax = fig.add_subplot()
 
                 ax.set_xlim([von,bis])
                 ax.set_ylim([von,bis])
 
                 x = np.linspace(-5, 5, 100)
                 y = m * x + b
-                plt.xlabel(x_entry.get())
-                plt.ylabel(y_entry.get())
-                plt.plot(x, y, 'r', label='f(x)='+ m_entry.get()+'*x+'+ b_entry.get())
-                plt.legend(loc='upper left')
-                plt.title('Funktion f(x)=m*x+b')
-                plt.show()
+
+                ax.set_xlabel(x_entry.get())
+                ax.set_ylabel(y_entry.get())
+                ax.plot(x, y, 'r', label='f(x)='+ m_entry.get()+'*x+'+ b_entry.get())
+                ax.legend(loc='upper left')
+                ax.set_title('Funktion f(x)=m*x+b')
+                fig.set_size_inches(5, 5)
+
+                cv = FigureCanvasTkAgg(fig, master=fenster)
+                cv.draw()
+                cv.get_tk_widget().grid(row=7, column=0)
 
             def bsp():
+                fig = plt.Figure(figsize=(10, 20), dpi=100)
+                ax = fig.add_subplot()
 
-                ax = plt.gca()
-                plt.gca().set_aspect('equal')
-
-                ax.set_xlim([-10, 10])
-                ax.set_ylim([-10,10])
-
+                ax.set_xlim([-5, 5])
+                ax.set_ylim([-5, 5])
 
                 x = np.linspace(-5, 5, 100)
-                y = 2 * x + 1
+                y = 1 * x + 1
 
-                plt.plot(x, y, 'r', label='f(x)=2*x+1')
-                plt.title('Funktion f(x)=m*x+b')
-                plt.legend(loc='upper left')
-                plt.grid()
-                plt.show()
+                ax.set_xlabel("x")
+                ax.set_ylabel("y")
+                ax.plot(x, y,  label='f(x)=1*x+1')
+                ax.legend(loc='upper left')
+                ax.set_title('Funktion f(x)=m*x+b')
+                fig.set_size_inches(5, 5)
+                cv = FigureCanvasTkAgg(fig, master=fenster)
+                cv.draw()
+                cv.get_tk_widget().grid(row=7, column=0)
 
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
@@ -114,15 +119,6 @@ def Funktion():
             b_entry = Entry(fenster)
             c_label = Label(fenster, text="c: ")
             c_entry = Entry(fenster)
-            #Scheitelpunkt
-            Alabel = Label(fenster,text="a")
-            Aentry = Entry(fenster)
-            x1label = Label(fenster,text="x")
-            x1entry = Entry(fenster)
-            xSlabel = Label(fenster,text="xS")
-            xSentry = Entry(fenster)
-            ySlabel = Label(fenster,text="yS")
-            ySentry = Entry(fenster)
 
             def rechnen():
                 von = von_entry.get()
@@ -136,60 +132,26 @@ def Funktion():
                 c = b_entry.get()
                 c = float(c)
 
-                ax = plt.gca()
-                plt.gca().set_aspect('equal')
+                fig = plt.Figure(figsize=(10, 20), dpi=100)
+                ax = fig.add_subplot()
 
                 ax.set_xlim([von,bis])
                 ax.set_ylim([von,bis])
 
-                ax.spines['top'].set_color('none')
-                ax.spines['bottom'].set_position('zero')
-                ax.spines['left'].set_position('zero')
-                ax.spines['right'].set_color('none')
-
                 x = np.linspace(-5, 5, 100)
                 y = a * x**2 + b * x + c
 
-                plt.xlabel(x_entry.get())
-                plt.ylabel(y_entry.get())
-                plt.title('Funktion $ax^2 + bx + c$')
-                plt.plot(x,y,'r',label='f(x)='+a_entry.get() + 'x^2'+'+' + b_entry.get() +'x'+'+'+ c_entry.get())
-                plt.legend(loc='upper left')
-                plt.show()
+                ax.set_xlabel(x_entry.get())
+                ax.set_ylabel(y_entry.get())
+                ax.set_title('Funktion $ax^2 + bx + c$')
+                fig.set_size_inches(5, 5)
+                ax.plot(x,y,'r',label='f(x)='+a_entry.get() + 'x^2'+'+' + b_entry.get() +'x'+'+'+ c_entry.get())
+                ax.legend(loc='upper left')
+                cv = FigureCanvasTkAgg(fig, master=fenster)
+                cv.draw()
+                cv.get_tk_widget().grid(row=10, column=0)
 
-            def scheitelpunkt():
-                von = von_entry.get()
-                von = float(von)
-                bis = bis_entry.get()
-                bis = float(bis)
-                A = Aentry.get()
-                A = float(A)
-                x1 = x1entry.get()
-                x1 = float(x1)
-                xS = xSentry.get()
-                xS = float(xS)
-                yS = ySentry.get()
-                yS = float(yS)
 
-                ax = plt.gca()
-                plt.gca().set_aspect('equal')
-
-                ax.set_xlim([von, bis])
-                ax.set_ylim([von, bis])
-
-                ax.spines['top'].set_color('none')
-                ax.spines['bottom'].set_position('zero')
-                ax.spines['left'].set_position('zero')
-                ax.spines['right'].set_color('none')
-
-                x = np.linspace(-5, 5, 100)
-                y = A(x1 - xS)**2+yS
-
-                plt.xlabel(x_entry.get())
-                plt.ylabel(y_entry.get())
-                plt.title('Funktion $ax^2 + bx + c$')
-                plt.plot(x, y)
-                plt.show()
             #normalfunktion
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
@@ -205,22 +167,13 @@ def Funktion():
             ya_entry.grid(row=5, column=1)
             xa_label.grid(row=6, column=0)
             xa_entry.grid(row=6, column=1)
-            #Scheitelpukt
-            Alabel.grid(row=0,column=6)
-            Aentry.grid(row=0,column=7)
-            x1label.grid(row=1,column=6)
-            x1entry.grid(row=1,column=7)
-            xSlabel.grid(row=2,column=6)
-            xSentry.grid(row=2,column=7)
-            ySlabel.grid(row=3,column=6)
-            ySentry.grid(row=3,column=7)
+
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=1)
-            Button(fenster, command=scheitelpunkt(), text="Anzeigen").grid(row=4, column=7)
             Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=8)
 
         elif clicked.get() == "Ganzrationale" :
-            root.destroy()
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
             bis_label = Label(fenster, text="ende: ")
@@ -231,7 +184,7 @@ def Funktion():
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
         elif clicked.get() == "Trigonometrische" :
-            root.destroy()
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
             bis_label = Label(fenster, text="ende: ")
@@ -242,7 +195,7 @@ def Funktion():
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
         elif clicked.get() =="Exponential" :
-            root.destroy()
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
             bis_label = Label(fenster, text="ende: ")
@@ -253,7 +206,7 @@ def Funktion():
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
         elif clicked.get() =="Einstieg-Differenzialrechnung":
-            root.destroy()
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
             bis_label = Label(fenster, text="ende: ")
@@ -264,7 +217,7 @@ def Funktion():
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
         elif clicked.get() =="Kurvendiskussion":
-            root.destroy()
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
             bis_label = Label(fenster, text="ende: ")
@@ -275,7 +228,7 @@ def Funktion():
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
         elif clicked.get() == "Integralrechnung":
-            root.destroy()
+
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
             bis_label = Label(fenster, text="ende: ")
@@ -297,9 +250,18 @@ def Funktion():
     OM.grid(row=1,column=0)
 
     root.mainloop()
+
+def inpAnmeldung():
+    current_input = Entry1.get()
+    current_input2 = Entry2.get()
+    print(current_input, current_input2)
+
 Label(Anmeldung, text="Benutzername").grid(row=1,column=9)
-Entry(Anmeldung).grid(row=2, column=9)
+Entry1= Entry(Anmeldung).grid(row=2, column=9)
+
 Label(Anmeldung,text="Passwort").grid(row=3,column=9)
-Entry(Anmeldung).grid(row=4,column=9)
+Entry2= Entry(Anmeldung).grid(row=4,column=9)
+
 Button(Anmeldung,text="Login",command=Funktion).grid(row=0,column=9)
+
 Anmeldung.mainloop()
