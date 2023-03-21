@@ -2,6 +2,7 @@ from tkinter import *
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import math as ma
 
 Anmeldung = Tk()
 Anmeldung.title("Login")
@@ -119,6 +120,8 @@ def Funktion():
             b_entry = Entry(fenster)
             c_label = Label(fenster, text="c: ")
             c_entry = Entry(fenster)
+            n1_label= Label(fenster,text="Nullstelle1")
+            n2_label= Label(fenster,text="Nullstelle2")
 
             def rechnen():
                 von = von_entry.get()
@@ -138,8 +141,14 @@ def Funktion():
                 ax.set_xlim([von,bis])
                 ax.set_ylim([von,bis])
 
+
                 x = np.linspace(von,bis,100)
                 y = a * x**2 + b * x + c
+                #nullstellen
+                n1= -b/2 + ma.sqrt(b/2**2+c)
+                n2= -b/2 - ma.sqrt(b/2**2+c)
+                n1 =str(n1)
+                n2=str(n2)
 
                 ax.set_xlabel(x_entry.get())
                 ax.set_ylabel(y_entry.get())
@@ -150,9 +159,14 @@ def Funktion():
                 cv = FigureCanvasTkAgg(fig, master=fenster)
                 cv.draw()
                 cv.get_tk_widget().grid(row=10, column=0)
-
+                n1_label = Label(fenster, text="Nullstelle1"+n1)
+                n2_label = Label(fenster, text="Nullstelle2"+n2)
+                n1_label.grid(row=10, column=5)
+                n2_label.grid(row=10, column=6)
 
             #normalfunktion
+            n1_label.grid(row=10, column=5)
+            n2_label.grid(row=10, column=6)
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
             bis_label.grid(row=1, column=0)
@@ -168,77 +182,11 @@ def Funktion():
             xa_label.grid(row=6, column=0)
             xa_entry.grid(row=6, column=1)
 
-
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=1)
             Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=8)
 
-        elif clicked.get() == "Ganzrationale" :
 
-            von_label = Label(fenster, text="anfang: ")
-            von_entry = Entry(fenster)
-            bis_label = Label(fenster, text="ende: ")
-            bis_entry = Entry(fenster)
-
-            von_label.grid(row=0, column=0)
-            von_entry.grid(row=0, column=1)
-            bis_label.grid(row=1, column=0)
-            bis_entry.grid(row=1, column=1)
-        elif clicked.get() == "Trigonometrische" :
-
-            von_label = Label(fenster, text="anfang: ")
-            von_entry = Entry(fenster)
-            bis_label = Label(fenster, text="ende: ")
-            bis_entry = Entry(fenster)
-
-            von_label.grid(row=0, column=0)
-            von_entry.grid(row=0, column=1)
-            bis_label.grid(row=1, column=0)
-            bis_entry.grid(row=1, column=1)
-        elif clicked.get() =="Exponential" :
-
-            von_label = Label(fenster, text="anfang: ")
-            von_entry = Entry(fenster)
-            bis_label = Label(fenster, text="ende: ")
-            bis_entry = Entry(fenster)
-
-            von_label.grid(row=0, column=0)
-            von_entry.grid(row=0, column=1)
-            bis_label.grid(row=1, column=0)
-            bis_entry.grid(row=1, column=1)
-        elif clicked.get() =="Einstieg-Differenzialrechnung":
-
-            von_label = Label(fenster, text="anfang: ")
-            von_entry = Entry(fenster)
-            bis_label = Label(fenster, text="ende: ")
-            bis_entry = Entry(fenster)
-
-            von_label.grid(row=0, column=0)
-            von_entry.grid(row=0, column=1)
-            bis_label.grid(row=1, column=0)
-            bis_entry.grid(row=1, column=1)
-        elif clicked.get() =="Kurvendiskussion":
-
-            von_label = Label(fenster, text="anfang: ")
-            von_entry = Entry(fenster)
-            bis_label = Label(fenster, text="ende: ")
-            bis_entry = Entry(fenster)
-
-            von_label.grid(row=0, column=0)
-            von_entry.grid(row=0, column=1)
-            bis_label.grid(row=1, column=0)
-            bis_entry.grid(row=1, column=1)
-        elif clicked.get() == "Integralrechnung":
-
-            von_label = Label(fenster, text="anfang: ")
-            von_entry = Entry(fenster)
-            bis_label = Label(fenster, text="ende: ")
-            bis_entry = Entry(fenster)
-
-            von_label.grid(row=0, column=0)
-            von_entry.grid(row=0, column=1)
-            bis_label.grid(row=1, column=0)
-            bis_entry.grid(row=1, column=1)
-    funktionen = ["Linear", "Qudratisch", "Ganzrationale", "Trigonometrische", "Exponential","Einstieg-Differenzialrechnung", "Kurvendiskussion", "Integralrechnung"]
+    funktionen = ["Linear", "Qudratisch"]
 
     clicked = StringVar()
     clicked.set(funktionen[0])
