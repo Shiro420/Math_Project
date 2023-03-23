@@ -2,18 +2,18 @@ from tkinter import *
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import math as ma
-
+import math as math
 Anmeldung = Tk()
 Anmeldung.title("Login")
 Anmeldung.geometry("400x400")
 Anmeldung.resizable(width=0, height=0)
 
+
 def Funktion():
     Anmeldung.destroy()
     root = Tk()
     root.title("main_window")
-    root.geometry("500x500")
+    root.geometry("400x400")
     root.resizable(width=0, height=0)
 
     def search(event):
@@ -24,9 +24,9 @@ def Funktion():
 
         if clicked.get() == 'Linear':
 
-            y_label = Label(fenster,text="y Achse")
+            y_label = Label(fenster, text="y Achse")
             y_entry = Entry(fenster)
-            x_label = Label(fenster,text="x Achse")
+            x_label = Label(fenster, text="x Achse")
             x_entry = Entry(fenster)
             von_label = Label(fenster, text="anfang: ")
             von_entry = Entry(fenster)
@@ -50,15 +50,15 @@ def Funktion():
                 fig = plt.Figure(figsize=(10, 20), dpi=100)
                 ax = fig.add_subplot()
 
-                ax.set_xlim([von,bis])
-                ax.set_ylim([von,bis])
+                ax.set_xlim([von, bis])
+                ax.set_ylim([von, bis])
 
                 x = np.linspace(von, bis, 100)
                 y = m * x + b
 
                 ax.set_xlabel(x_entry.get())
                 ax.set_ylabel(y_entry.get())
-                ax.plot(x, y, 'r', label='f(x)='+ m_entry.get()+'*x+'+ b_entry.get())
+                ax.plot(x, y, 'r', label='f(x)=' + m_entry.get() + '*x+' + b_entry.get())
                 ax.legend(loc='upper left')
                 ax.set_title('Funktion f(x)=m*x+b')
                 fig.set_size_inches(5, 5)
@@ -79,7 +79,7 @@ def Funktion():
 
                 ax.set_xlabel("x")
                 ax.set_ylabel("y")
-                ax.plot(x, y,  label='f(x)=1*x+1')
+                ax.plot(x, y, label='f(x)=1*x+1')
                 ax.legend(loc='upper left')
                 ax.set_title('Funktion f(x)=m*x+b')
                 fig.set_size_inches(5, 5)
@@ -91,21 +91,21 @@ def Funktion():
             von_entry.grid(row=0, column=1)
             bis_label.grid(row=1, column=0)
             bis_entry.grid(row=1, column=1)
-            m_label.grid(row=2,column=0)
-            m_entry.grid(row=2,column=1)
-            b_label.grid(row=3,column=0)
-            b_entry.grid(row=3,column=1)
-            y_label.grid(row=4,column=0)
-            y_entry.grid(row=4,column=1)
-            x_label.grid(row=5,column=0)
-            x_entry.grid(row=5,column=1)
+            m_label.grid(row=2, column=0)
+            m_entry.grid(row=2, column=1)
+            b_label.grid(row=3, column=0)
+            b_entry.grid(row=3, column=1)
+            y_label.grid(row=4, column=0)
+            y_entry.grid(row=4, column=1)
+            x_label.grid(row=5, column=0)
+            x_entry.grid(row=5, column=1)
 
-            Button(fenster, command=rechnen, text="Anzeigen").grid(row=6,column=1)
+            Button(fenster, command=rechnen, text="Anzeigen").grid(row=6, column=1)
             Button(fenster, command=bsp, text="Beispiel").grid(row=0, column=4)
-            Button(fenster,text="close",command=fenster.destroy).grid(row=0,column=9)
+            Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=9)
 
         elif clicked.get() == "Qudratisch":
-            #Noramalfunkion
+            # Noramalfunkion
             ya_label = Label(fenster, text="y Achse")
             ya_entry = Entry(fenster)
             xa_label = Label(fenster, text="x Achse")
@@ -120,8 +120,7 @@ def Funktion():
             b_entry = Entry(fenster)
             c_label = Label(fenster, text="c: ")
             c_entry = Entry(fenster)
-            n1_label= Label(fenster,text="Nullstelle1")
-            n2_label= Label(fenster,text="Nullstelle2")
+
 
             def rechnen():
                 von = von_entry.get()
@@ -138,35 +137,63 @@ def Funktion():
                 fig = plt.Figure(figsize=(10, 20), dpi=100)
                 ax = fig.add_subplot()
 
-                ax.set_xlim([von,bis])
-                ax.set_ylim([von,bis])
+                ax.set_xlim([von, bis])
+                ax.set_ylim([von, bis])
 
+                x = np.linspace(von, bis, 100)
+                y = a * x ** 2 + b * x + c
 
-                x = np.linspace(von,bis,100)
-                y = a * x**2 + b * x + c
-                #nullstellen
-                n1= -b/2 + ma.sqrt(b/2**2+c)
-                n2= -b/2 - ma.sqrt(b/2**2+c)
-                n1 =str(n1)
-                n2=str(n2)
+                #Nullstellen
+                try:
+                    b1=b/a
+                    c1=c/a
 
-                ax.set_xlabel(x_entry.get())
-                ax.set_ylabel(y_entry.get())
+                    n1 =-b1/2 +math.sqrt((b1/2)**2-(c1))
+                    n2 =-b1/2 -math.sqrt((b1/2)**2-(c1))
+
+                    yy=[0,0]
+                    xx=[n1,n2]
+                except:
+                    Label(fenster,Text="keine Nullstellen")
+                ax.scatter(xx, yy, )
+                ax.set_xlabel(xa_entry.get())
+                ax.set_ylabel(ya_entry.get())
                 ax.set_title('Funktion $ax^2 + bx + c$')
                 fig.set_size_inches(5, 5)
-                ax.plot(x,y,'r',label='f(x)='+a_entry.get() + 'x^2'+'+' + b_entry.get() +'x'+'+'+ c_entry.get())
+                ax.plot(x, y, 'r',label='f(x)=' + a_entry.get() + 'x^2' + '+' + b_entry.get() + 'x' + '+' + c_entry.get())
                 ax.legend(loc='upper left')
                 cv = FigureCanvasTkAgg(fig, master=fenster)
                 cv.draw()
                 cv.get_tk_widget().grid(row=10, column=0)
-                n1_label = Label(fenster, text="Nullstelle1"+n1)
-                n2_label = Label(fenster, text="Nullstelle2"+n2)
-                n1_label.grid(row=10, column=5)
-                n2_label.grid(row=10, column=6)
+            def bsp():
+                fig = plt.Figure(figsize=(10, 20), dpi=100)
+                ax = fig.add_subplot()
 
-            #normalfunktion
-            n1_label.grid(row=10, column=5)
-            n2_label.grid(row=10, column=6)
+                ax.set_xlim([-10, 10])
+                ax.set_ylim([-10, 10])
+
+                x = np.linspace(-10, 10, 100)
+                y = 1 * x ** 2 + -4 * x + 2
+
+                # Nullstellen
+
+                n1 = 4 / 2 + math.sqrt((-4 / 2) ** 2 - (2))
+                n2 = 4 / 2 - math.sqrt((-4 / 2) ** 2 - (2))
+
+                yy = [0, 0]
+                xx = [n1, n2]
+                ax.scatter(xx, yy, )
+                ax.set_xlabel(xa_entry.get())
+                ax.set_ylabel(ya_entry.get())
+                ax.set_title('Funktion $ax^2 + bx + c$')
+                fig.set_size_inches(5, 5)
+                ax.plot(x, y, 'r',label="f(x)=x^2-4x+2")
+                ax.legend(loc='upper left')
+                cv = FigureCanvasTkAgg(fig, master=fenster)
+                cv.draw()
+                cv.get_tk_widget().grid(row=10, column=0)
+
+            # normalfunktion
             von_label.grid(row=0, column=0)
             von_entry.grid(row=0, column=1)
             bis_label.grid(row=1, column=0)
@@ -182,8 +209,9 @@ def Funktion():
             xa_label.grid(row=6, column=0)
             xa_entry.grid(row=6, column=1)
 
-            Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=1)
-            Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=8)
+            Button(fenster, command=rechnen, text="Anzeigen").grid(row=0, column=4)
+            Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=6)
+            Button(fenster, command=bsp, text="Beispeil").grid(row=0, column=5)
 
 
     funktionen = ["Linear", "Qudratisch"]
@@ -191,25 +219,23 @@ def Funktion():
     clicked = StringVar()
     clicked.set(funktionen[0])
 
-    label1 = Label(root,text="Funktionen Auswahl")
-    label1.grid(row=0,column=0)
+    label1 = Label(root, text="Funktionen Auswahl")
+    label1.grid(row=0, column=0)
 
-    OM = OptionMenu(root, clicked, *funktionen,command=search)
-    OM.grid(row=1,column=0)
+    OM = OptionMenu(root, clicked, *funktionen, command=search)
+    OM.grid(row=1, column=0)
 
     root.mainloop()
+
 
 def inpAnmeldung():
     current_input = Entry1.get()
     current_input2 = Entry2.get()
     print(current_input, current_input2)
 
-Label(Anmeldung, text="Benutzername").grid(row=1,column=9)
-Entry1= Entry(Anmeldung).grid(row=2, column=9)
-
-Label(Anmeldung,text="Passwort").grid(row=3,column=9)
-Entry2= Entry(Anmeldung).grid(row=4,column=9)
-
-Button(Anmeldung,text="Login",command=Funktion).grid(row=0,column=9)
-
+Label(Anmeldung, text="Benutzername").grid(row=1, column=9)
+Entry1 = Entry(Anmeldung).grid(row=2, column=9)
+Label(Anmeldung, text="Passwort").grid(row=3, column=9)
+Entry2 = Entry(Anmeldung).grid(row=4, column=9)
+Button(Anmeldung, text="Login", command=Funktion).grid(row=0, column=9)
 Anmeldung.mainloop()
