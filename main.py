@@ -13,7 +13,7 @@ def Funktion():
     Anmeldung.destroy()
     root = Tk()
     root.title("main_window")
-    root.geometry("900x900")
+    root.geometry("500x500")
     root.resizable(width=0, height=0)
 
     def search(event):
