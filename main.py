@@ -155,7 +155,7 @@ def Funktion():
                     yy=[0,0]
                     xx=[n1,n2]
                 except:
-                    Label(fenster,Text="keine Nullstellen")
+                    Label(fenster,Text="keine Nullstellen").grid(row=0,column=10)
                 ax.scatter(xx, yy, )
                 ax.set_xlabel(xa_entry.get())
                 ax.set_ylabel(ya_entry.get())
