@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import math as math
-
 Anmeldung = Tk()
 Anmeldung.title("Login")
 Anmeldung.geometry("400x400")
@@ -155,17 +154,16 @@ def Funktion():
                     yy=[0,0]
                     xx=[n1,n2]
                 except:
-                    Label(fenster,Text="keine Nullstellen").grid(row=0,column=10)
-                	fig = plt.Figure(figsize=(10, 20), dpi=100)
-                	ax = fig.add_subplot()
 
-                	ax.set_xlim([von, bis])
-                	ax.set_ylim([von, bis])
+                    ax.set_xlim([von, bis])
+                    ax.set_ylim([von, bis])
 
-                	x = np.linspace(von, bis, 100)
-                	y = a * x ** 2 + b * x + c
-                
-                ax.scatter(xx, yy, )
+                    x = np.linspace(von, bis, 100)
+                    y = a * x ** 2 + b * x + c
+                try:
+                 ax.scatter(xx, yy, )
+                except:
+                    Label(fenster, text="keine Nullstellen").grid(row=0, column=8)
                 ax.set_xlabel(xa_entry.get())
                 ax.set_ylabel(ya_entry.get())
                 ax.set_title('Funktion $ax^2 + bx + c$')
