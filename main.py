@@ -103,7 +103,7 @@ def Funktion():
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=6, column=1)
             Button(fenster, command=bsp, text="Beispiel").grid(row=0, column=4)
-            Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=9)
+            Button(fenster, text="Schließen", command=fenster.destroy).grid(row=0, column=9)
 
         elif clicked.get() == "Qudratisch":
             # Noramalfunkion
@@ -143,7 +143,6 @@ def Funktion():
 
                 x = np.linspace(von, bis, 100)
                 y = a * x ** 2 + b * x + c
-
                 #Nullstellen
                 try:
                     b1=b/a
@@ -154,6 +153,7 @@ def Funktion():
 
                     yy=[0,0]
                     xx=[n1,n2]
+
                 except:
 
                     ax.set_xlim([von, bis])
@@ -162,18 +162,22 @@ def Funktion():
                     x = np.linspace(von, bis, 100)
                     y = a * x ** 2 + b * x + c
                 try:
-                 ax.scatter(xx, yy, )
+                 n1_1 = str(n1)
+                 n2_1 = str(n2)
+                 ax.scatter(xx, yy,label="Nullstelle1" + n1_1+"und"+"Nullstelle2" + n2_1)
                 except:
-                    Label(fenster, text="keine Nullstellen").grid(row=0, column=8)
+                 ax.plot(x,y,"b",label="Keine Nullstellen")
+
                 ax.set_xlabel(xa_entry.get())
                 ax.set_ylabel(ya_entry.get())
                 ax.set_title('Funktion $ax^2 + bx + c$')
-                fig.set_size_inches(5, 5)
+                fig.set_size_inches(7, 7)
                 ax.plot(x, y, 'r',label='f(x)=' + a_entry.get() + 'x^2' + '+' + b_entry.get() + 'x' + '+' + c_entry.get())
                 ax.legend(loc='upper left')
                 cv = FigureCanvasTkAgg(fig, master=fenster)
                 cv.draw()
-                cv.get_tk_widget().grid(row=10, column=0)
+                cv.get_tk_widget().grid(row=10, column=5)
+
             def bsp():
                 fig = plt.Figure(figsize=(10, 20), dpi=100)
                 ax = fig.add_subplot()
@@ -195,12 +199,12 @@ def Funktion():
                 ax.set_xlabel(xa_entry.get())
                 ax.set_ylabel(ya_entry.get())
                 ax.set_title('Funktion $ax^2 + bx + c$')
-                fig.set_size_inches(5, 5)
+                fig.set_size_inches(7, 7)
                 ax.plot(x, y, 'r',label="f(x)=x^2-4x+2")
                 ax.legend(loc='upper left')
                 cv = FigureCanvasTkAgg(fig, master=fenster)
                 cv.draw()
-                cv.get_tk_widget().grid(row=10, column=0)
+                cv.get_tk_widget().grid(row=10, column=5)
 
             # normalfunktion
             von_label.grid(row=0, column=0)
@@ -219,7 +223,7 @@ def Funktion():
             xa_entry.grid(row=6, column=1)
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=0, column=4)
-            Button(fenster, text="close", command=fenster.destroy).grid(row=0, column=6)
+            Button(fenster, text="Schließen", command=fenster.destroy).grid(row=0, column=6)
             Button(fenster, command=bsp, text="Beispeil").grid(row=0, column=5)
 
 
@@ -234,6 +238,10 @@ def Funktion():
     OM = OptionMenu(root, clicked, *funktionen, command=search)
     OM.grid(row=1, column=0)
 
+    def Logout():
+        root.destroy()
+
+    Button(root, text="Abmelden", command=Logout).grid(row=0, column=3)
     root.mainloop()
 
 
@@ -242,9 +250,13 @@ def inpAnmeldung():
     current_input2 = Entry2.get()
     print(current_input, current_input2)
 
+def Logout():
+    Anmeldung.destroy()
+
 Label(Anmeldung, text="Benutzername").grid(row=1, column=9)
 Entry1 = Entry(Anmeldung).grid(row=2, column=9)
 Label(Anmeldung, text="Passwort").grid(row=3, column=9)
 Entry2 = Entry(Anmeldung).grid(row=4, column=9)
-Button(Anmeldung, text="Login", command=Funktion).grid(row=0, column=9)
+Button(Anmeldung,text="Abmelden", command=Logout).grid(row=0,column=10)
+Button(Anmeldung, text="Anmelden", command=Funktion).grid(row=0, column=9)
 Anmeldung.mainloop()
