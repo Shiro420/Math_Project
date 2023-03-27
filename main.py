@@ -15,7 +15,6 @@ def inpAnmeldung():
     current_input2 = Entry2.get()
     print(current_input, current_input2)
 
-
 def Funktion():
     Anmeldung.destroy()
     root = Tk()
@@ -232,7 +231,7 @@ def Funktion():
 
             Button(fenster, command=rechnen, text="Anzeigen").grid(row=7, column=0)
             Button(fenster, text="Schließen", command=fenster.destroy).grid(row=8, column=0)
-            Button(fenster, command=bsp, text="Beispeil").grid(row=7, column=1)
+            Button(fenster, command=bsp, text="Beispiel").grid(row=7, column=1)
 
         if clicked.get() == 'Ganzrationale':
 
@@ -255,7 +254,7 @@ def Funktion():
                 ax.set_ylim([von, bis])
 
                 x = np.linspace(von, bis, 100)
-                y = 1
+                y = 1*x+1
                 #Nullstellen
 
                 ax.set_xlim([-10, 10])
@@ -265,7 +264,7 @@ def Funktion():
                 ax.set_ylabel(ya_entry.get())
                 ax.set_title()
                 fig.set_size_inches(7, 7)
-                ax.plot()
+                ax.plot(x,y)
                 ax.legend(loc='upper left')
                 cv = FigureCanvasTkAgg(fig, master=fenster)
                 cv.draw()
@@ -282,8 +281,66 @@ def Funktion():
             Button(fenster, text="Schließen", command=fenster.destroy).grid(row=2, column=0)
             #Button(fenster, command=bsp, text="Beispeil").grid(row=0, column=0)
 
+        if clicked.get() == 'Trigonometrische Funktionen':
+            a_label = Label(fenster, text="Amplitude:")
+            a_entry = Entry(fenster)
+            t_label = Label(fenster, text="Frequenz:")
+            t_entry = Entry(fenster)
+            ph_label = Label(fenster, text="Phase:")
+            ph_entry = Entry(fenster)
+            function_type_var = StringVar(value='sin')
+            sin_radio = Radiobutton(fenster, text='Sinus', variable=function_type_var, value='sin')
+            cos_radio = Radiobutton(fenster, text='Cosinus', variable=function_type_var, value='cos')
+            tan_radio = Radiobutton(fenster, text='Tangens', variable=function_type_var, value='tan')
 
-    funktionen = ["Linear", "Qudratisch","Ganzrationale"]
+            fig = plt.Figure(figsize=(10, 10), dpi=100)
+            ax = fig.add_subplot()
+
+            cv = FigureCanvasTkAgg(fig, master=fenster)
+            cv.draw()
+
+            def rechnen():
+
+                a= a_entry.get()
+                a = float(a)
+                t = t_entry.get()
+                t = float(t)
+                ph = ph_entry.get()
+                ph = float(ph)
+
+                x = np.linspace(0, 2 * np.pi, 1000)
+                if function_type_var == 'sin':
+                    y = a * np.sin(t * x + ph)
+                    title = 'Sinusfunktion'
+                elif function_type_var == 'cos':
+                    y = a * np.cos(t * x + ph)
+                    title = 'Cosinusfunktion'
+                elif function_type_var == 'tan':
+                    y = a * np.tan(t * x + ph)
+                    title = 'Tangensfunktion'
+
+
+                ax.plot(x, y)
+                ax.set_xlabel('x')
+                ax.set_ylabel('y')
+                ax.set_title(title)
+                cv.draw()
+
+                cv.get_tk_widget().grid(row=10, column=5)
+
+            a_label.grid(row=0,column=0)
+            a_entry.grid(row=0,column=1)
+            t_label.grid(row=1,column=0)
+            t_entry.grid(row=1,column=1)
+            ph_label.grid(row=2,column=0)
+            ph_entry.grid(row=2,column=1)
+            sin_radio.grid(row=3,column=0)
+            cos_radio.grid(row=4,column=0)
+            tan_radio.grid(row=5,column=0)
+            Button(fenster, command=rechnen, text="Anzeigen").grid(row=0, column=4)
+
+
+    funktionen = ["Linear", "Qudratisch","Ganzrationale","Trigonometrische Funktionen"]
 
     clicked = StringVar()
     clicked.set(funktionen[0])
@@ -301,16 +358,28 @@ def Funktion():
     Button(root, text="Abmelden", command=Logout).grid(row=0, column=3)
     root.mainloop()
 
-def Logout():
+"""def Logout():
     Anmeldung.destroy()
 
 def Regristierungs_input():
     Register = Tk()
     Register.title("Registration")
-
+    new_Benutzername = Label(Register, text="Benutzername")
+    Benutzername_input = Entry(Register, bd=5, width=40)
+    new_Passwort = Label(Register, text="Passwort")
+    Passwort_input = Entry(Register, bd=5, width=40)
+    new_Passwort_bestägung = Label(Register, text="Bestätigung des Passworts")
+    Passwort_bestätigung_input = Entry(Register, bd=5, width=40)
+    Button(Register, text="Registrieren", command=Regristierungs_input).grid(row=6, column=0)
     new_Benutzername = Benutzername_input.get()
     new_Passwort = Passwort_input.get()
     new_Passwort_bestägung = Passwort_bestätigung_input.get()
+    new_Benutzername.grid(row=0, column=0)
+    Benutzername_input.grid(row=0, column=1)
+    new_Passwort.grid(row=1, column=0)
+    Passwort_input.grid(row=1, column=1)
+    new_Passwort_bestägung.grid(row=2, column=0)
+    Passwort_bestätigung_input.grid(row=2, column=1)
 
     if new_Passwort == Passwort_bestätigung_input and Benutzername_input != "":
          if regristierungs_Prüfen(new_Benutzername):
@@ -327,43 +396,30 @@ def Regristierungs_input():
                 Error.destroy()
 
             Button(Error, text="Ok", command=OkButtonClick).grid(row=0,column=0)
-            Label(Error,
-                              text="Dieser Benutzername existiert bereits! Bitte wählen Sie einen anderen!").grid(row=1,column=0)
+            Label(Error,text="Dieser Benutzername existiert bereits! Bitte wählen Sie einen anderen!").grid(row=1,column=0)
 
-    else:
-        print("Das Passwort und die Bestätigung des Passworts stimmen nicht überein")
-        RegisterFail = Tk()
-        RegisterFail.title("Error")
-        RegisterFail.geometry("500x50")
-        RegisterFail.resizable(width=0, height=0)
+        else:
+            print("Das Passwort und die Bestätigung des Passworts stimmen nicht überein")
+            RegisterFail = Tk()
+            RegisterFail.title("Error")
+            RegisterFail.geometry("500x50")
+            RegisterFail.resizable(width=0, height=0)
 
-        def OkButtonClick():
-            RegisterFail.destroy()
+    def OkButtonClick():
+        RegisterFail.destroy()
 
-        Button(RegisterFail, text="Ok", command=OkButtonClick).grid(row=0,column=0)
-        Label(RegisterFail,
-                              text="Das Passwort und die Bestätigung des Passwortes stimmen nicht überein!").grid(row=1,column=0)
+    Button(RegisterFail, text="Ok", command=OkButtonClick).grid(row=0,column=0)
+    Label(RegisterFail,
+                              text="Das Passwort und die Bestätigung des Passwortes stimmen nicht überein!").grid(row=1,column=0)"""
 
-    new_Benutzername = Label(Register, text="Benutzername")
-    Benutzername_input = Entry(Register, bd=5, width=40)
-    new_Passwort = Label(Register, text="Passwort")
-    Passwort_input = Entry(Register, bd=5, width=40)
-    new_Passwort_bestägung = Label(Register, text="Bestätigung des Passworts")
-    Passwort_bestätigung_input = Entry(Register, bd=5, width=40)
-    Button(Register, text="Registrieren", command=Regristierungs_input).grid(row=6, column=0)
-    new_Benutzername.grid(row=0, column=0)
-    Benutzername_input.grid(row=0, column=1)
-    new_Passwort.grid(row=1, column=0)
-    Passwort_input.grid(row=1, column=1)
-    new_Passwort_bestägung.grid(row=2, column=0)
-    Passwort_bestätigung_input.grid(row=2, column=1)
+
 
 
 Label(Anmeldung, text="Benutzername").grid(row=1, column=0)
 Entry1 = Entry(Anmeldung).grid(row=1, column=1)
 Label(Anmeldung, text="Passwort").grid(row=2, column=0)
 Entry2 = Entry(Anmeldung).grid(row=2, column=1)
-Button(Anmeldung,text="Abmelden", command=Logout).grid(row=5,column=1)
+#Button(Anmeldung,text="Abmelden", command=Logout).grid(row=5,column=1)
 Button(Anmeldung, text="Anmelden", command=Funktion).grid(row=0, column=1)
-Button(Anmeldung, text="Registrieren", command=Regristierungs_input).grid(row=0,column=0)
+#Button(Anmeldung, text="Registrieren", command=Regristierungs_input).grid(row=0,column=0)
 Anmeldung.mainloop()
