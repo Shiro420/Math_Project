@@ -61,6 +61,19 @@ def Funktion():
 
                 x = np.linspace(von, bis, 100)
                 y = m * x + b
+                # Nullstelle
+                try:
+                    x1 =(-b/m)
+                    y1 = 0
+                    x1_1 = str(x1)
+                    ax.scatter(x1, y1, label="Nullstelle " + x1_1)
+                except:
+
+                    ax.set_xlim([von, bis])
+                    ax.set_ylim([von, bis])
+
+                    x = np.linspace(von, bis, 100)
+                    y = m * x + b
 
                 ax.set_xlabel(x_entry.get())
                 ax.set_ylabel(y_entry.get())
@@ -82,7 +95,13 @@ def Funktion():
 
                 x = np.linspace(-5, 5, 100)
                 y = 1 * x + 1
+                #Nullstelle
 
+                x1=-1
+                y1=0
+                x1_1=str(x1)
+
+                ax.scatter(x1,y1,label="Nullstelle "+x1_1)
                 ax.set_xlabel("x")
                 ax.set_ylabel("y")
                 ax.plot(x, y, label='f(x)=1*x+1')
