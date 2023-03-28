@@ -5,40 +5,41 @@ def create_db():
     con = sqlite3.connect("mathe.db")
     cur = con.cursor()
 
-    sql = "CREATE TABLE user (" \
-          "username TEXT, " \
-          "passwort TEXT);"
+    sql =  f"""CREATE TABLE anmeldung(
+                benutzername TEXT,
+                passwort TEXT
+            );"""
     cur.execute(sql)
     con.commit()
 
-    Benutzer = "admin"
-    Passwort = "admin"
+    Benutzer = "A"
+    Passwort = "A"
     insert = f"INSERT INTO anmeldung VALUES('{Benutzer}', '{Passwort}');"
     cur.execute(insert)
     con.close()
 
-def NewAcc(name, passwort):
-    connection = sqlite3.connect("mathe.db")
-    cursor = connection.cursor()
-    InsertNewAcc = f"INSERT INTO anmeldung VALUES('{name}', '{passwort}');"
-    cursor.execute(InsertNewAcc)
-    connection.commit()
-    connection.close()
-
-def Prüfanm(name, passwort):
+def NewAcc(Benutzer, Passwort):
     con = sqlite3.connect("mathe.db")
-    cur= con.cursor()
+    cur = con.cursor()
+    InsertNewAcc = f"INSERT INTO anmeldung VALUES('{Benutzer}', '{Passwort}');"
+    cur.execute(InsertNewAcc)
+    con.commit()
+    con.close()
+
+def anmeldung(Benutzer, Passwort):
+    con = sqlite3.connect("mathe.db")
+    cur = con.cursor()
 
     statement = f"""SELECT benutzername
                     FROM anmeldung
-                    WHERE benutzername ='{name}' AND passwort= '{passwort}'"""
+                    WHERE benutzername ='{Benutzer}' AND passwort= '{Passwort}'"""
     cur.execute(statement)
     k = cur.fetchone()
     if not k:
         return False
     else:
         return True
-def regristierungs_Prüfen(Benutzer):
+def regristierungs_prüfen(Benutzer):
     con = sqlite3.connect("mathe.db")
     cur = con.cursor()
 
@@ -46,8 +47,8 @@ def regristierungs_Prüfen(Benutzer):
           FROM anmeldung 
           WHERE benutzername = '{Benutzer}';"""
 
-    PrüfRgst = cur.execute(sql).fetchone()
-    if PrüfRgst:
+    regristierungs_Prüfen = cur.execute(sql).fetchone()
+    if regristierungs_Prüfen:
         return False
     else:
         return True
