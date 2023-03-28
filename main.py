@@ -31,16 +31,9 @@ def input_Anmeldung():
         Erroranm.title("Error")
         Erroranm.geometry("500x50")
         Erroranm.resizable(width=0, height=0)
-        OkButton = Button(Erroranm, text="Ok", command=OkButtonClick)
-        LabelFail = Label(Erroranm,
-                          text="Dieser Account existiert nicht! Bitte versuchen sie es erneut")
-
-        LabelFail.pack()
-        OkButton.pack()
-
-
-
-
+        Button(Erroranm, text="Ok", command=OkButtonClick).grid(row=1,column=0)
+        Label(Erroranm,text="Dieser Account existiert nicht! Bitte versuchen sie es erneut").grid(row=0,column=0)
+        
         def search(event):
             fenster = Tk()
             fenster.title("Window")
