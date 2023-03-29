@@ -14,26 +14,25 @@ def input_Anmeldung():
     input = Benutzername_login.get()
     input2 = Passwort_login.get()
     print(input, input2)
-
+    root = Tk()
     def OkButtonClick():
-        Erroranm.destroy()
+        Error.destroy()
 
     if anmeldung(input,input2):
         login.destroy()
-        root = Tk()
         root.title("main_window")
         root.geometry("400x400")
         root.resizable(width=0, height=0)
-        clicked = StringVar()
-        clicked.set(clicked)
+
+
     else:
-        Erroranm = Tk()
-        Erroranm.title("Error")
-        Erroranm.geometry("500x50")
-        Erroranm.resizable(width=0, height=0)
-        Button(Erroranm, text="Ok", command=OkButtonClick).grid(row=1,column=0)
-        Label(Erroranm,text="Dieser Account existiert nicht! Bitte versuchen sie es erneut").grid(row=0,column=0)
-        
+        Error = Tk()
+        Error.title("Error")
+        Error.geometry("500x50")
+        Error.resizable(width=0, height=0)
+        Button(Error, text="Ok", command=OkButtonClick).grid(row=1,column=0)
+        Label(Error,text="Dieser Account existiert nicht! Bitte versuchen sie es erneut").grid(row=0,column=0)
+
         def search(event):
             fenster = Tk()
             fenster.title("Window")
@@ -370,13 +369,11 @@ def input_Anmeldung():
                 tan_radio.grid(row=5,column=0)
                 Button(fenster, command=rechnen, text="Anzeigen").grid(row=0, column=4)
 
-
-
-
-
-
     label1 = Label(root, text="Funktionen Auswahl")
     label1.grid(row=0, column=0)
+
+    clicked = StringVar()
+    clicked.set(clicked)
 
     OM = OptionMenu(root, clicked, "Linear", "Qudratisch","Ganzrationale","Trigonometrische Funktionen", command=search)
     OM.grid(row=1, column=0)
