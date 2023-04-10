@@ -19,12 +19,11 @@ def input_Anmeldung():
         Error.destroy()
 
     if anmeldung(input,input2):
+        
         login.destroy()
         root.title("main_window")
         root.geometry("400x400")
         root.resizable(width=0, height=0)
-
-
     else:
         Error = Tk()
         Error.title("Error")
@@ -269,24 +268,24 @@ def input_Anmeldung():
                 von_entry = Entry(fenster)
                 bis_label = Label(fenster, text="ende: ")
                 bis_entry = Entry(fenster)
+                Entry1 = Entry(fenster)
+                Entry1.grid(row=0, column=1)
+                def buttonStartClick():
+                    i = 1
+                    E = Entry1.get()
+                    E = float(E)
+                    while i <= E:
+                        i2 = str(i)
+                        ent = Entry(fenster).grid(row=i, column=3)
+                        Label(fenster, text="x" + i2).grid(row=i, column=2)
+
+                        i += 1
+
+                    # Button zum Start
+
+                buttonStart = Button(master=fenster, text="stellen", command=buttonStartClick).grid(row=0, column=0)
 
                 def rechnen():
-                    von = von_entry.get()
-                    von = float(von)
-                    bis = bis_entry.get()
-                    bis = float(bis)
-
-                    fig = plt.Figure(figsize=(10, 20), dpi=100)
-                    ax = fig.add_subplot()
-
-
-                    ax.set_xlim([von, bis])
-                    ax.set_ylim([von, bis])
-
-                    x = np.linspace(von, bis, 100)
-                    y = 1*x+1
-                    #Nullstellen
-
                     ax.set_xlim([-10, 10])
                     ax.set_ylim([-10, 10])
                     ax.scatter()
@@ -294,7 +293,7 @@ def input_Anmeldung():
                     ax.set_ylabel(ya_entry.get())
                     ax.set_title()
                     fig.set_size_inches(7, 7)
-                    ax.plot(x,y)
+                    #ax.plot(x,y)
                     ax.legend(loc='upper left')
                     cv = FigureCanvasTkAgg(fig, master=fenster)
                     cv.draw()
@@ -392,15 +391,15 @@ def Register():
     Registerfenster = Tk()
     Registerfenster.title("Registration")
     def Regristierungs_input():
-        new_Benutzername = Benutzername_input.get()
-        new_Passwort = Passwort_input.get()
-        new_Passwort_bestägung = Passwort_bestätigung_input.get()
+        new_Benutzername = new_Benutzername.get()
+        new_Passwort = new_Passwort.get()
+        new_Passwort_bestägung = new_Passwort_bestägung.get()
 
-        if new_Passwort == Passwort_bestätigung_input and Benutzername_input != "":
+        if new_Passwort == new_Passwort_bestägung and new_Benutzername != "":
 
             if regristierungs_prüfen(new_Benutzername):
                 print(new_Benutzername,new_Passwort ,new_Passwort_bestägung)
-                NewAcc(Benutzername_input.get(),Passwort_input.get())
+                NewAcc(new_Benutzername.get(),new_Passwort.get())
                 Ausgabe()
                 Register.destroy()
             else:
@@ -427,20 +426,20 @@ def Register():
             Label(RegisterFail,text="Das Passwort und die Bestätigung des Passwortes stimmen nicht überein!").grid(row=1,column=0)
 
     new_Benutzername = Label(Registerfenster, text="Benutzername")
-    Benutzername_input = Entry(Registerfenster, bd=5, width=40)
+    new_Benutzername = Entry(Registerfenster, bd=5, width=40)
     new_Passwort = Label(Registerfenster, text="Passwort")
-    Passwort_input = Entry(Registerfenster, bd=5, width=40)
+    new_Passwort = Entry(Registerfenster, bd=5, width=40)
     new_Passwort_bestägung = Label(Registerfenster, text="Bestätigung des Passworts")
-    Passwort_bestätigung_input = Entry(Registerfenster, bd=5, width=40)
+    new_Passwort_bestägung = Entry(Registerfenster, bd=5, width=40)
 
     Button(Registerfenster, text="Registrieren", command=Regristierungs_input).grid(row=6, column=0)
 
     new_Benutzername.grid(row=0, column=0)
-    Benutzername_input.grid(row=0, column=1)
+    new_Benutzername.grid(row=0, column=1)
     new_Passwort.grid(row=1, column=0)
-    Passwort_input.grid(row=1, column=1)
+    new_Passwort.grid(row=1, column=1)
     new_Passwort_bestägung.grid(row=2, column=0)
-    Passwort_bestätigung_input.grid(row=2, column=1)
+    new_Passwort_bestägung.grid(row=2, column=1)
 
 Label(login, text="Benutzername").grid(row=1, column=0)
 Benutzername_login = Entry(login)
